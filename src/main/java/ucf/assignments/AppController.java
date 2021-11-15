@@ -258,9 +258,9 @@ public class AppController {
             // Goes to the CreateItem function with the information provided
             ItemList = ItemMain.CreateItem(ItemList, AddNameF.getText(), AddDescriptionF.getText(), Date, (String) AddStatusC.getValue());
 
-            if(EditFlag == 0){
-               ItemList = ItemMain.DestroyItem(ItemList, CurrentItem.name);
-            }
+            // Flag to check if currentitem will be destroyed
+            ItemList = ItemMain.EditItem(ItemList, CurrentItem.name, EditFlag);
+
             // Adds the new item to the currentlist
             CurrentList.ItemList = ItemList;
 

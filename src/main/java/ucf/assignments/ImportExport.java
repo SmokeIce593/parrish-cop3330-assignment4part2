@@ -37,6 +37,7 @@ public class ImportExport {
     public static List<ItemMain.Items> ImportItems(List<ItemMain.Items> ItemList, String Path) throws IOException {
         File importdata = new File(Path);
         // C:/Users/Cameron/Desktop/export.txt
+        // C:/Users/parriscz/Downloads/export.txt
         BufferedReader br = new BufferedReader(new FileReader(importdata));
 
         String current;

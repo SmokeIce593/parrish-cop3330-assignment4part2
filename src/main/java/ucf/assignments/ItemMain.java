@@ -76,6 +76,13 @@ public class ItemMain {
          */
     }
 
+    public static List<ItemMain.Items> EditItem(List<ItemMain.Items> ItemList, String Current, int EditFlag){
+        if(EditFlag == 0){
+            ItemList = ItemMain.DestroyItem(ItemList, Current);
+        }
+        return ItemList;
+    }
+
 
 
 }
