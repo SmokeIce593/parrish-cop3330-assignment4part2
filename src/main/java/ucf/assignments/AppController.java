@@ -8,11 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,30 +100,26 @@ public class AppController {
 
     // Navigates to Edit Item page
     @FXML
-    public void EditItemButton() throws IOException {
+    public void EditItemButton() {
         try {
-            if (!ItemListView.getSelectionModel().getSelectedItem().equals(null)) {
-                vboxTest.setDisable(false);
-                vboxTest.setVisible(true);
-                RectangleMain.setVisible(true);
-                CurrentItem = ItemMain.EditItemGetObj(ItemList, ItemListView.getSelectionModel().getSelectedItem().toString());
-                AddNameF.setText(CurrentItem.name);
-                AddDescriptionF.setText(CurrentItem.description);
+            ItemListView.getSelectionModel().getSelectedItem();
+            vboxTest.setDisable(false);
+            vboxTest.setVisible(true);
+            RectangleMain.setVisible(true);
+            CurrentItem = ItemMain.EditItemGetObj(ItemList, ItemListView.getSelectionModel().getSelectedItem().toString());
+            assert CurrentItem != null;
+            AddNameF.setText(CurrentItem.name);
+            AddDescriptionF.setText(CurrentItem.description);
 
-                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                //LocalDate localDate = LocalDate.parse(CurrentItem.duedate, formatter);
-
-                //AddDateP.setValue(localDate);
-                AddDueDateF.setText(CurrentItem.duedate);
-                AddStatusC.setValue(CurrentItem.status);
-                EditFlag = 0;
-            }
+            AddDueDateF.setText(CurrentItem.duedate);
+            AddStatusC.setValue(CurrentItem.status);
+            EditFlag = 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         /*
-        Psuedocode:
+        Pseudocode:
         Using .setDisable and .setVisible undisable the vbox and make that and rectangle visible.
         Find item using EditItemGetObj
         Set respective fields (AddNameF AddDescriptionF AddDateP and AddStatusC) to values from EditItemGetObj
@@ -136,7 +129,7 @@ public class AppController {
     }
 
     @FXML
-    public void CreateItemButton() throws IOException {
+    public void CreateItemButton() {
 
         vboxTest.setDisable(false);
         vboxTest.setVisible(true);
@@ -149,7 +142,7 @@ public class AppController {
         AddStatusC.setValue("Incomplete");
 
         /*
-        Psuedocode:
+        Pseudocode:
         Using .setDisable and .setVisible undisable the vbox and make that and rectangle visible.
         Set global variable Editflag to 1 (0 would denote edting an item)
         Clear all fields (AddNameF AddDescriptionF AddDateP and AddStatusC)
@@ -158,26 +151,26 @@ public class AppController {
     }
 
     @FXML
-    public void AddEditBackPress() throws IOException {
+    public void AddEditBackPress() {
         vboxTest.setDisable(true);
         vboxTest.setVisible(false);
         RectangleMain.setVisible(false);
 
         /*
-        Psuedocode:
+        Pseudocode:
         Using .setDisable and .setVisible disable the vbox and make that and rectangle invisible.
          */
     }
 
     @FXML
-    public void ClearList() throws IOException {
+    public void ClearList() {
         ItemList.clear();
         ItemListView.getItems().clear();
         CurrentList.ItemList.clear();
         ConfirmFilterButton();
 
         /*
-        Psuedocode:
+        Pseudocode:
         Clear ItemList, ItemListView, and CurrentList.ItemList (This is a complete wipe of all items)
         Then run ConfirmFilterButton (This resets the ItemListView and FilterItemList)
          */
@@ -187,7 +180,7 @@ public class AppController {
 
 
     @FXML
-    public void DeleteItemButton() throws IOException {
+    public void DeleteItemButton() {
         // We also want to remove the selected item from the ItemList
         try {
             ItemMain.DestroyItem(ItemList, ItemListView.getSelectionModel().getSelectedItem().toString());
@@ -205,7 +198,7 @@ public class AppController {
         }
 
         /*
-        Psuedocode:
+        Pseudocode:
         We want to remove the current selected item from our main ItemList
         To do so we have to iterate through the size of the list and compare the name of that item
         to the selected item (converted to a string)
@@ -224,10 +217,10 @@ public class AppController {
     // Export/Import using the TextField File Location
     @FXML
     public void SaveListButton() throws IOException {
-        ItemList = ImportExport.ExportItems(ItemList, PathLocation.getText());
+        ImportExport.ExportItems(ItemList, PathLocation.getText());
 
         /*
-        Psuedocode:
+        Pseudocode:
         When SaveListButton is clicked
         It will pass to ExportItems method (Which will export the items)
          */
@@ -235,11 +228,11 @@ public class AppController {
 
     @FXML
     public void ImportListButton() throws IOException {
-        ItemList = ImportExport.ImportItems(ItemList, PathLocation.getText());
+        ImportExport.ImportItems(ItemList, PathLocation.getText());
         CurrentList.ItemList = ItemList;
         ConfirmFilterButton();
          /*
-        Psuedocode:
+        Pseudocode:
         When ImportListButton is clicked
         It will pass to ImportItems method (Which will export the items)
          */
@@ -252,7 +245,7 @@ public class AppController {
     // When the submit button is clicked it runs this
     // Add item to current to-do list based on the different labels
     // Then go back to the item view list based on the current to-do list
-    public void CreateItemSubmitButton() throws IOException {
+    public void CreateItemSubmitButton() {
         try {
             // This checks to make sure the date is formatted correctly
             // If it is not it will not submit.
@@ -261,7 +254,7 @@ public class AppController {
             }
             //String Date = AddDateP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             // Goes to the CreateItem function with the information provided
-            ItemList = ItemMain.CreateItem(ItemList, AddNameF.getText(), AddDescriptionF.getText(), AddDueDateF.getText(), (String) AddStatusC.getValue());
+            ItemMain.CreateItem(ItemList, AddNameF.getText(), AddDescriptionF.getText(), AddDueDateF.getText(), (String) AddStatusC.getValue());
 
             // Flag to check if currentitem will be destroyed
             ItemList = ItemMain.EditItem(ItemList, CurrentItem.name, EditFlag);
@@ -269,7 +262,7 @@ public class AppController {
             // Adds the new item to the currentlist
             CurrentList.ItemList = ItemList;
 
-            // Clears list view and readds everything back
+            // Clears list view and reads everything back
             ConfirmFilterButton();
 
 
@@ -289,7 +282,7 @@ public class AppController {
 
 
         /*
-        Psuedocode:
+        Pseudocode:
         Convert the date using a date formatter into yyyy-mm-dd using DateTimeFormatter
         Set ItemList equal to the method CreateItem. That function goes and adds all the fields into an item and adds
         the item to ItemList then returns ItemList.
@@ -305,13 +298,13 @@ public class AppController {
                 ItemListView.getItems().add(CurrentList.ItemList.get(i).name);
             }
         } else {
-            for (int i = 0; i < FilterItemList.size(); i++) {
-                ItemListView.getItems().add(FilterItemList.get(i).name);
+            for (ItemMain.Items items : FilterItemList) {
+                ItemListView.getItems().add(items.name);
             }
 
         }
         /*
-        Psuedocode:
+        Pseudocode:
         Clear the ItemListView (The purpose of this function is to display correct items)
         If the value taken in (FilterFlag equals 0) we need to iterate through the size of currentlist.itemlist
         and add all items to ItemListView
@@ -320,19 +313,18 @@ public class AppController {
     }
 
     @FXML
-    public void ConfirmFilterButton() throws IOException {
+    public void ConfirmFilterButton() {
         int FilterFlag;
         FilterItemList.clear();
        if(FilterChoices.getValue() == "Incomplete"){
-           FilterItemList = Filter.InCompleteItems(ItemList, FilterItemList);
+           Filter.InCompleteItems(ItemList, FilterItemList);
            FilterFlag = 1;
         }
        else if(FilterChoices.getValue() == "Complete"){
-           FilterItemList = Filter.CompleteItems(ItemList, FilterItemList);
+           Filter.CompleteItems(ItemList, FilterItemList);
            FilterFlag = 1;
        }
        else{
-           ItemList = Filter.AllItems(ItemList, FilterItemList);
            FilterFlag = 0;
 
        }
@@ -340,7 +332,7 @@ public class AppController {
        wipe(FilterFlag);
 
        /*
-        Psuedocode:
+        Pseudocode:
         Clear FilterList
         Check FilterChoice to see if it's incomplete, complete, or all.
         If it's incomplete or complete set FilterFlag to 1 (Which is used in wipe)
