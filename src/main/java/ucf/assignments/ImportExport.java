@@ -7,8 +7,6 @@ package ucf.assignments;
 import java.io.*;
 import java.util.List;
 
-import static java.lang.System.out;
-
 public class ImportExport {
     public static List<ItemMain.Items> ExportItems(List<ItemMain.Items> ItemList, String Path) throws IOException {
         try {

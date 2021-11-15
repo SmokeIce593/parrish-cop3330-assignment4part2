@@ -163,7 +163,7 @@ class AppTest {
         List<ItemMain.Items> FilterItemList = new ArrayList<>();
         ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
         int size = ItemList.size();
-        ItemList = Filter.AllItems(ItemList, FilterItemList);
+        ItemList = Filter.AllItems(ItemList);
         Assertions.assertTrue(size == ItemList.size() && Objects.equals(ItemList.get(0).name, "Bob"));
 
         /*

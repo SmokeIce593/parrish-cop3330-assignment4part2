@@ -4,29 +4,29 @@
  */
 package ucf.assignments;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Filter {
 
-    public static List<ItemMain.Items> AllItems(List<ItemMain.Items> ItemList, List<ItemMain.Items> FilterItemList){
+    public static List<ItemMain.Items> AllItems(List<ItemMain.Items> ItemList){
 
         return ItemList;
         /*
-        Psuedocode:
+        Pseudocode:
         Just passes through ItemList for now
          */
     }
 
     public static List<ItemMain.Items> CompleteItems(List<ItemMain.Items> ItemList, List<ItemMain.Items> FilterItemList){
-        for(int i=0; i<ItemList.size(); i++){
-            if(ItemList.get(i).status.toString() == "Complete"){
-                FilterItemList.add(ItemList.get(i));
+        for (ItemMain.Items items : ItemList) {
+            if (Objects.equals(items.status, "Complete")) {
+                FilterItemList.add(items);
             }
         }
         return FilterItemList;
         /*
-        Psuedocode:
+        Pseudocode:
         Iterate through the length of ItemList.size
         If ItemList.get status is equal to complete add it to FilterItemList
         Return FilterItemList
@@ -34,9 +34,9 @@ public class Filter {
     }
 
     public static List<ItemMain.Items> InCompleteItems(List<ItemMain.Items> ItemList, List<ItemMain.Items> FilterItemList){
-        for(int i=0; i<ItemList.size(); i++){
-            if(ItemList.get(i).status.toString() == "Incomplete"){
-                FilterItemList.add(ItemList.get(i));
+        for (ItemMain.Items items : ItemList) {
+            if (Objects.equals(items.status, "Incomplete")) {
+                FilterItemList.add(items);
             }
         }
 
@@ -44,7 +44,7 @@ public class Filter {
 
         return FilterItemList;
         /*
-        Psuedocode:
+        Pseudocode:
         Iterate through the length of ItemList.size
         If ItemList.get status is equal to Incomplete add it to FilterItemList
         Return FilterItemList
