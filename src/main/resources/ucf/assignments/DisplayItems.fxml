@@ -84,15 +84,15 @@
                   <Insets left="85.0" />
                </VBox.margin></TextField>
             <Separator layoutX="10.0" layoutY="115.0" maxHeight="10.0" orientation="VERTICAL" prefHeight="50.0" />
-            <Label fx:id="DueDateAddL" layoutX="95.0" layoutY="125.0" prefHeight="21.0" prefWidth="152.0" text="Due Date">
+            <Label fx:id="DueDateAddL" layoutX="200.0" layoutY="125.0" prefHeight="21.0" prefWidth="152.0" text="Due Date">
                <VBox.margin>
                   <Insets left="85.0" />
                </VBox.margin>
             </Label>
-            <DatePicker fx:id="AddDateP" maxWidth="200.0">
+            <TextField fx:id="AddDueDateF" maxWidth="200.0">
                <VBox.margin>
                   <Insets left="85.0" />
-               </VBox.margin></DatePicker>
+               </VBox.margin></TextField>
             <Separator layoutX="10.0" layoutY="185.0" maxHeight="10.0" orientation="VERTICAL" prefHeight="50.0" />
             <Label fx:id="StatusAddL" layoutX="95.0" layoutY="195.0" prefHeight="20.0" prefWidth="152.0" text="Status">
                <padding>

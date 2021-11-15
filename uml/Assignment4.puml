@@ -1,0 +1,86 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class App {
+    start(Stage stage)
+}
+
+class AppController {
+    + void initialize()
+    + void EditItemButton()
+    + void CreateItemButton()
+    + void EditListButton()
+    + void DeleteItemButton()
+    + void MarkAsCompleteButton()
+    + void ViewItemsButton()
+    + void DeleteListButton()
+    + void AddNewListButton()
+    + void ExportAllListsButton()
+    + void ExportSelListButton()
+    + void ImportListButton()
+    + void AddListSubmitButton()
+    + void ToDoListSubmitEButton()
+    + void ItemEditSubmitButton()
+    + void CreateItemSubmitButton()
+    + void ConfirmFilterButton()
+    + List<ToDoListMain.ToDoList> MainList
+    + ToDoListMain.ToDoList CurrentList
+    + ItemMain.Items CurrentItem
+    String Date
+}
+
+class Filter {
+    + {static} ToDoListMain.ToDoList AllItems(ToDoList CurrentList)
+    + {static} ToDoListMain.ToDoList CompleteItems(ToDoList CurrentList)
+    + {static} ToDoListMain.ToDoList InCompleteItems(ToDoList CurrentList)
+    List<ToDoListMain.ToDoList> FilterList
+}
+
+class ItemMain {
+    + {static} CreateItem(ToDoListMain.ToDoList CurrentList, String Name, String Description, String Duedate, String Status)
+    + {static} ToDoListMain.ToDoList EditItem(ToDoListMain.ToDoList CurrentList, ItemMain.Items CurrentItem,  String Name, String Description, String Duedate, String Status)
+    + Items EditItemGetObj(ToDoListMain.ToDoList CurrentList, ItemMain.Items CurrentItem, String name)
+    + {static} ToDoListMain.ToDoList DestroyItem(ToDoListMain.ToDoList CurrentList, ItemMain.Items CurrentItem)
+
+}
+
+class Navigator {
+     + {static} void MainNavigate(String Name)
+}
+
+class ToDoListMain {
+    + {static} List<ToDoList> CreateList(List<ToDoList> MainList, String name)
+    + {static} List<ToDoList> EditList(List<ToDoList> MainList, ToDoListMain.ToDoList CurrentList, String newname)
+    + {static} ToDoList EditListGetObj(List<ToDoList> MainList, ToDoListMain.ToDoList CurrentList, String listname)
+    + {static} List<ToDoList> DestroyList(List<ToDoList> MainList, String listname)
+    + {static} ToDoList ExportSelList(List<ToDoList> MainList, ToDoListMain.ToDoList CurrentList)
+    + {static} List<ToDoList> ExportAllList(List<ToDoList> MainList)
+    + {static} List<ToDoList> ImportLists(List<ToDoList> MainList)
+    List<ToDoList> CreateList
+
+
+
+class Items{
+        - int id
+        - String name
+        - String description
+        - String duedate
+        - String status
+}
+
+class ToDoList{
+        - int ID
+        - String Name
+        - List<ItemMain.Items> ItemList
+}
+
+
+
+ItemMain *-- Items
+ToDoListMain *-- ToDoList
+App <|-- AppController
+AppController <|-- Filter
+AppController <|-- ItemMain
+AppController <|-- Navigator
+AppController <|-- ToDoListMain
+@enduml

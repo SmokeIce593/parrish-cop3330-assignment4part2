@@ -44,7 +44,7 @@ public class AppController {
     public Rectangle RectangleMain;
     public TextField AddNameF;
     public TextField AddDescriptionF;
-    public DatePicker AddDateP;
+    public TextField AddDueDateF;
     public ChoiceBox AddStatusC;
     public VBox vboxTest;
     public Button CreateItemSubmitB;
@@ -113,10 +113,11 @@ public class AppController {
                 AddNameF.setText(CurrentItem.name);
                 AddDescriptionF.setText(CurrentItem.description);
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate localDate = LocalDate.parse(CurrentItem.duedate, formatter);
+                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                //LocalDate localDate = LocalDate.parse(CurrentItem.duedate, formatter);
 
-                AddDateP.setValue(localDate);
+                //AddDateP.setValue(localDate);
+                AddDueDateF.setText(CurrentItem.duedate);
                 AddStatusC.setValue(CurrentItem.status);
                 EditFlag = 0;
             }
@@ -144,7 +145,7 @@ public class AppController {
 
         AddNameF.clear();
         AddDescriptionF.clear();
-        AddDateP.setValue(null);
+        AddDueDateF.clear();
         AddStatusC.setValue("Incomplete");
 
         /*
@@ -253,10 +254,14 @@ public class AppController {
     // Then go back to the item view list based on the current to-do list
     public void CreateItemSubmitButton() throws IOException {
         try {
-            String Date = AddDateP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            System.out.printf("%s", Date);
+            // This checks to make sure the date is formatted correctly
+            // If it is not it will not submit.
+            if(!AddDueDateF.getText().matches("\\d\\d\\d\\d-\\d\\d-\\d\\d")){
+                return;
+            }
+            //String Date = AddDateP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             // Goes to the CreateItem function with the information provided
-            ItemList = ItemMain.CreateItem(ItemList, AddNameF.getText(), AddDescriptionF.getText(), Date, (String) AddStatusC.getValue());
+            ItemList = ItemMain.CreateItem(ItemList, AddNameF.getText(), AddDescriptionF.getText(), AddDueDateF.getText(), (String) AddStatusC.getValue());
 
             // Flag to check if currentitem will be destroyed
             ItemList = ItemMain.EditItem(ItemList, CurrentItem.name, EditFlag);
@@ -274,7 +279,7 @@ public class AppController {
             RectangleMain.setVisible(false);
             AddNameF.clear();
             AddDescriptionF.clear();
-            AddDateP.setValue(null);
+            AddDueDateF.clear();
             AddStatusC.setValue(null);
         } catch (Exception e) {
             e.printStackTrace();
