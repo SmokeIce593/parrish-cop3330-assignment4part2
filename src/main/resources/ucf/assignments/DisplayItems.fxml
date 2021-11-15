@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.AppController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="314.0" layoutX="227.0" layoutY="81.0" stroke="#0084ff" strokeType="INSIDE" width="368.0" AnchorPane.leftAnchor="227.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="53.0" stroke="#0084ff" strokeType="INSIDE" width="600.0" AnchorPane.leftAnchor="0.0" />
+      <Label alignment="CENTER" layoutX="31.0" layoutY="6.0" prefHeight="45.0" prefWidth="541.0" text="To-Do Application">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ListView fx:id="ItemListView" layoutX="14.0" layoutY="88.0" prefHeight="306.0" prefWidth="200.0" />
+      <Label layoutX="17.0" layoutY="56.0" prefHeight="32.0" prefWidth="91.0" text="Items">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <VBox layoutX="233.0" layoutY="91.0" prefHeight="293.0" prefWidth="145.0">
+         <children>
+            <Button fx:id="EditItem" mnemonicParsing="false" onAction="#EditItemButton" prefHeight="13.0" prefWidth="145.0" text="Edit Item" />
+            <Separator opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Button fx:id="DeleteItem" mnemonicParsing="false" onAction="#DeleteItemButton" prefHeight="10.0" prefWidth="145.0" text="Delete Item" />
+            <Separator opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Button fx:id="CreateItem" mnemonicParsing="false" onAction="#CreateItemButton" prefHeight="7.0" prefWidth="155.0" text="Add Item" />
+            <Separator opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Button fx:id="ClearListButton" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" onAction="#ClearList" prefHeight="25.0" prefWidth="193.0" text="Clear List" />
+         </children>
+      </VBox>
+      <ChoiceBox fx:id="FilterChoices" layoutX="64.0" layoutY="60.0" prefHeight="25.0" prefWidth="105.0" />
+      <Button fx:id="ConfirmFilter" layoutX="169.0" layoutY="60.0" mnemonicParsing="false" onAction="#ConfirmFilterButton" text="Confirm" />
+      <VBox layoutX="435.0" layoutY="91.0" prefHeight="293.0" prefWidth="145.0">
+         <children>
+            <Button fx:id="SaveList" mnemonicParsing="false" onAction="#SaveListButton" prefHeight="13.0" prefWidth="145.0" text="Save List" />
+            <Separator opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Button fx:id="ImportList" mnemonicParsing="false" onAction="#ImportListButton" prefHeight="10.0" prefWidth="145.0" text="Import List" />
+            <Separator opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Separator opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Separator opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Separator layoutX="10.0" layoutY="150.0" opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Separator layoutX="10.0" layoutY="180.0" opacity="0.0" prefHeight="30.0" prefWidth="145.0" />
+            <Separator layoutX="10.0" layoutY="210.0" opacity="0.0" prefHeight="44.0" prefWidth="145.0" />
+            <Label fx:id="Import_Export" text="File Location" textFill="WHITE" />
+            <TextField fx:id="PathLocation" />
+         </children>
+      </VBox>
+      <Rectangle fx:id="RectangleMain" arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="314.0" layoutX="230.0" layoutY="81.0" stroke="#0084ff" strokeType="INSIDE" width="362.0" AnchorPane.leftAnchor="230.0" />
+      <VBox fx:id="vboxTest" layoutY="80.0" minHeight="320.0" minWidth="370.0" prefHeight="320.0" prefWidth="200.0" AnchorPane.leftAnchor="225.0">
+         <children>
+            <HBox maxHeight="25.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="AddEditBack" mnemonicParsing="false" onAction="#AddEditBackPress" prefHeight="37.0" prefWidth="52.0" text="Close" />
+                  <Label fx:id="AddEditL" maxWidth="400.0" prefHeight="35.0" prefWidth="233.0" text="Add/Edit Item">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="60.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="88.0" maxHeight="5.0" orientation="VERTICAL" prefHeight="25.0" />
+            <Label fx:id="NameAddL" layoutX="125.0" layoutY="10.0" prefHeight="21.0" prefWidth="152.0" text="Unique Name">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin></Label>
+            <TextField fx:id="AddNameF" maxWidth="200.0" prefHeight="25.0" prefWidth="148.0">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin></TextField>
+            <Separator maxHeight="10.0" orientation="VERTICAL" prefHeight="50.0" />
+            <Label fx:id="DescriptionAddL" layoutX="95.0" layoutY="70.0" prefHeight="20.0" prefWidth="152.0" text="Description">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="AddDescriptionF" maxWidth="200.0" minWidth="148.0" prefHeight="25.0" prefWidth="161.0">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin></TextField>
+            <Separator layoutX="10.0" layoutY="115.0" maxHeight="10.0" orientation="VERTICAL" prefHeight="50.0" />
+            <Label fx:id="DueDateAddL" layoutX="95.0" layoutY="125.0" prefHeight="21.0" prefWidth="152.0" text="Due Date">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin>
+            </Label>
+            <DatePicker fx:id="AddDateP" maxWidth="200.0">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin></DatePicker>
+            <Separator layoutX="10.0" layoutY="185.0" maxHeight="10.0" orientation="VERTICAL" prefHeight="50.0" />
+            <Label fx:id="StatusAddL" layoutX="95.0" layoutY="195.0" prefHeight="20.0" prefWidth="152.0" text="Status">
+               <padding>
+                  <Insets left="85.0" />
+               </padding>
+            </Label>
+            <ChoiceBox fx:id="AddStatusC" maxWidth="200.0" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <Separator layoutX="10.0" layoutY="212.0" maxHeight="20.0" orientation="VERTICAL" prefHeight="50.0" />
+            <Button fx:id="CreateItemSubmitB" mnemonicParsing="false" onAction="#CreateItemSubmitButton" prefHeight="31.0" prefWidth="70.0" text="Submit">
+               <VBox.margin>
+                  <Insets left="150.0" />
+               </VBox.margin>
+            </Button>
+         </children></VBox>
+   </children>
+</AnchorPane>
