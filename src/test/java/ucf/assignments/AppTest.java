@@ -3,26 +3,24 @@
  *  Copyright 2021 Cameron Parrish
  */
 package ucf.assignments;
-
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 
 class AppTest {
     @Test
     void AddItem(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
-            Assert.assertTrue(ItemList.get(0).name == "Bob" && ItemList.get(0).description == "Test");
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        Assertions.assertTrue(Objects.equals(ItemList.get(0).name, "Bob") && Objects.equals(ItemList.get(0).description, "Test"));
 
             /*
-            Psuedocode:
+            Pseudocode:
             Create ItemList array of Items
             Have this equal to CreateItem from the ItemMain class. Fill in random strings to test.
             Assert.assertTrue and test to make sure that ItemList.get(0) contains the correct strings
@@ -33,12 +31,13 @@ class AppTest {
     void RemoveItem(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
         String Name = "Bob";
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
         ItemList = ItemMain.DestroyItem(ItemList, Name);
-        Assert.assertTrue(ItemList.isEmpty());
+        assert ItemList != null;
+        Assertions.assertTrue(ItemList.isEmpty());
 
         /*
-            Psuedocode:
+            Pseudocode:
             Create ItemList array of Items
             Have this equal to CreateItem from the ItemMain class. Fill in random strings to test.
             Have ItemList equal DestroyItem from the ItemMain class. Fill in with correct name of item.
@@ -55,21 +54,21 @@ class AppTest {
     You click an item and click "Edit item" which adds all the various strings to correct locations
     When first clicked to edit flag is set to 0 to denote an edit. This means it will go search for the
     object clicked. When you click an object and click edit it stores it in currentitem.
-    CurrentItem.name is what we want to search for in the ItemMain (Hence why it will be hardset here)
-    The edit flag is also hardset here since we want to denote edit and not create
+    CurrentItem.name is what we want to search for in the ItemMain (Hence why it will be hardest here)
+    The edit flag is also hardest here since we want to denote edit and not create
      */
     void EditDueDate(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
-        ItemMain.Items CurrentItem = new ItemMain.Items();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        ItemMain.Items CurrentItem;
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
         CurrentItem = ItemList.get(0);
         ItemList = ItemMain.EditItem(ItemList, CurrentItem.name, 0);
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2018-11-21", "Complete");
-        Assert.assertEquals(ItemList.get(0).duedate, "2018-11-21");
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2018-11-21", "Complete");
+        Assertions.assertEquals(ItemList.get(0).duedate, "2018-11-21");
 
 
         /*
-        Psuedocode:
+        Pseudocode:
         We want to create an ItemList and a CurrentItem (List of items and single item)
         Have ItemList equal to CreateItem from the ItemMain class. Fill in random strings to test.
         Here we are going to emulate us selecting an item. When we select an item it technically
@@ -98,15 +97,15 @@ class AppTest {
     @Test
     void EditDescriptionItem(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
-        ItemMain.Items CurrentItem = new ItemMain.Items();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        ItemMain.Items CurrentItem;
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
         CurrentItem = ItemList.get(0);
         ItemList = ItemMain.EditItem(ItemList, CurrentItem.name, 0);
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Jolly", "2019-12-01", "Complete");
-        Assert.assertEquals(ItemList.get(0).description, "Jolly");
+        ItemMain.CreateItem(ItemList, "Bob", "Jolly", "2019-12-01", "Complete");
+        Assertions.assertEquals(ItemList.get(0).description, "Jolly");
 
         /*
-        Psuedocode:
+        Pseudocode:
         We want to create an ItemList and a CurrentItem (List of items and single item)
         Have ItemList equal to CreateItem from the ItemMain class. Fill in random strings to test.
         Here we are going to emulate us selecting an item. When we select an item it technically
@@ -125,14 +124,15 @@ class AppTest {
     @Test
     void EditItemOBJTest(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
-        ItemMain.Items CurrentItem = new ItemMain.Items();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Incomplete");
+        ItemMain.Items CurrentItem;
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Incomplete");
 
         CurrentItem = ItemMain.EditItemGetObj(ItemList, "Bob");
-        Assert.assertEquals(CurrentItem.name, ItemList.get(0).name);
+        assert CurrentItem != null;
+        Assertions.assertEquals(CurrentItem.name, ItemList.get(0).name);
 
          /*
-            Psuedocode:
+            Pseudocode:
             Create ItemList array of Items
             Create CurrentItem (which is just an Item)
             Have ItemList equal to CreateItem from the ItemMain class. Fill in random strings to test.
@@ -144,11 +144,11 @@ class AppTest {
     @Test
     void MarkItemAsComplete(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
-        Assert.assertTrue(ItemList.get(0).status == "Complete");
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        Assertions.assertSame("Complete", ItemList.get(0).status);
 
         /*
-            Psuedocode:
+            Pseudocode:
             Create ItemList array of Items
             Have this equal to CreateItem from the ItemMain class. Fill in random strings to test.
             Assert.assertTrue and test to make sure that ItemList.get(0) contains the correct strings
@@ -161,13 +161,13 @@ class AppTest {
     void DisplayAllItems(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
         List<ItemMain.Items> FilterItemList = new ArrayList<>();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
         int size = ItemList.size();
         ItemList = Filter.AllItems(ItemList, FilterItemList);
-        Assert.assertTrue(size == ItemList.size() && ItemList.get(0).name == "Bob");
+        Assertions.assertTrue(size == ItemList.size() && Objects.equals(ItemList.get(0).name, "Bob"));
 
         /*
-        Psuedocode:
+        Pseudocode:
         Create Item list and FilterItem List (Item array and Item)
         Create Item using CreateItem from ItemMain class.
         Note the size of ItemList.
@@ -181,14 +181,14 @@ class AppTest {
     void DisplayIncompletedItems(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
         List<ItemMain.Items> FilterItemList = new ArrayList<>();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
-        ItemList = ItemMain.CreateItem(ItemList, "Builder", "Test", "2019-12-01", "Incomplete");
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        ItemMain.CreateItem(ItemList, "Builder", "Test", "2019-12-01", "Incomplete");
         int size = ItemList.size();
         ItemList = Filter.InCompleteItems(ItemList, FilterItemList);
-        Assert.assertTrue(size != ItemList.size() && ItemList.get(0).name != "Bob");
+        Assertions.assertTrue(size != ItemList.size() && !Objects.equals(ItemList.get(0).name, "Bob"));
 
         /*
-        Psuedocode:
+        Pseudocode:
         Create Item list and FilterItem List (Item array and Item)
         Create two Items using CreateItem from ItemMain class (One complete and one incomplete)
         Note the size of ItemList.
@@ -203,14 +203,14 @@ class AppTest {
     void DisplayCompletedItems(){
         List<ItemMain.Items> ItemList = new ArrayList<>();
         List<ItemMain.Items> FilterItemList = new ArrayList<>();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
-        ItemList = ItemMain.CreateItem(ItemList, "Builder", "Test", "2019-12-01", "Incomplete");
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        ItemMain.CreateItem(ItemList, "Builder", "Test", "2019-12-01", "Incomplete");
         int size = ItemList.size();
         ItemList = Filter.CompleteItems(ItemList, FilterItemList);
-        Assert.assertTrue(size != ItemList.size() && ItemList.get(0).name == "Bob");
+        Assertions.assertTrue(size != ItemList.size() && Objects.equals(ItemList.get(0).name, "Bob"));
 
         /*
-        Psuedocode:
+        Pseudocode:
         Create Item list and FilterItem List (Item array and Item)
         Create two Items using CreateItem from ItemMain class (One complete and one incomplete)
         Note the size of ItemList.
@@ -226,14 +226,14 @@ class AppTest {
     // The path will need to be changed to work
     void ExportList() throws IOException {
         List<ItemMain.Items> ItemList = new ArrayList<>();
-        ItemList = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
-        List<ItemMain.Items> ItemListCompare = new ArrayList<>();
+        ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
+        List<ItemMain.Items> ItemListCompare;
         ItemListCompare = ItemMain.CreateItem(ItemList, "Bob", "Test", "2019-12-01", "Complete");
-        ItemList = ImportExport.ExportItems(ItemList, "C:/Users/parriscz/Downloads/export.txt");
-        Assert.assertEquals(ItemList.get(0).name, ItemListCompare.get(0).name);
+        ImportExport.ExportItems(ItemList, "C:/Users/parriscz/Downloads/export.txt");
+        Assertions.assertEquals(ItemList.get(0).name, ItemListCompare.get(0).name);
 
         /*
-        Psuedocode:
+        Pseudocode:
         This just checks and makes sure that ItemList is passed into the function and does not change.
         Create ItemList and ItemListcompare.
         Have this equal to CreateItem from the ItemMain class. Fill in random strings to test.
@@ -250,15 +250,15 @@ class AppTest {
     void ImportList() throws IOException {
         String Path = "C:/Users/parriscz/Downloads/export.txt";
         List<ItemMain.Items> ItemListCreate = new ArrayList<>();
-        ItemListCreate = ItemMain.CreateItem(ItemListCreate, "bob", "Test", "2019-12-01", "Complete");
-        ItemListCreate = ImportExport.ExportItems(ItemListCreate, Path);
+        ItemMain.CreateItem(ItemListCreate, "bob", "Test", "2019-12-01", "Complete");
+        ImportExport.ExportItems(ItemListCreate, Path);
 
         List<ItemMain.Items> ItemList = new ArrayList<>();
-        ItemList = ImportExport.ImportItems(ItemList, Path);
-        Assert.assertEquals(ItemList.get(0).name, "bob");
+        ImportExport.ImportItems(ItemList, Path);
+        Assertions.assertEquals(ItemList.get(0).name, "bob");
 
         /*
-        Psuedocode:
+        Pseudocode:
         Creates an ItemListCreate instance
         Have this equal to CreateItem from the ItemMain class. Fill in random strings to test.
         Have ItemList equal the Export method from ImportExport class (with my desktop path) with path
