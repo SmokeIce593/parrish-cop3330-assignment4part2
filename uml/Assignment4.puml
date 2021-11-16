@@ -6,72 +6,68 @@ class App {
 }
 
 class AppController {
-    + void initialize()
-    + void EditItemButton()
-    + void CreateItemButton()
-    + void EditListButton()
-    + void DeleteItemButton()
-    + void MarkAsCompleteButton()
-    + void ViewItemsButton()
-    + void DeleteListButton()
-    + void AddNewListButton()
-    + void ExportAllListsButton()
-    + void ExportSelListButton()
-    + void ImportListButton()
-    + void AddListSubmitButton()
-    + void ToDoListSubmitEButton()
-    + void ItemEditSubmitButton()
-    + void CreateItemSubmitButton()
-    + void ConfirmFilterButton()
-    + List<ToDoListMain.ToDoList> MainList
-    + ToDoListMain.ToDoList CurrentList
-    + ItemMain.Items CurrentItem
-    String Date
+        + ToDoListMain.ToDoList CurrentList
+        + ItemMain.Items CurrentItem
+        + List<ItemMain.Items> ItemList
+        + List<ItemMain.Items> FilterItemList
+        + int EditFlag
+        + void initialize()
+        + void EditItemButton()
+        + void CreateItemButton()
+        + void AddEditBackPress()
+        + void ClearList()
+        + void DeleteItemButton()
+        + void SaveListButton()
+        + void ImportListButton()
+        + void CreateItemSubmitButton()
+        + void wipe(int FilterFlag)
+        + void ConfirmFilterButton()
 }
 
 class Filter {
-    + {static} ToDoListMain.ToDoList AllItems(ToDoList CurrentList)
-    + {static} ToDoListMain.ToDoList CompleteItems(ToDoList CurrentList)
-    + {static} ToDoListMain.ToDoList InCompleteItems(ToDoList CurrentList)
-    List<ToDoListMain.ToDoList> FilterList
+    + {static} List<ItemMain.Items> CompleteItems(List<ItemMain.Items> ItemList, List<ItemMain.Items> FilterItemList)
+    + {static}  List<ItemMain.Items> AllItems(List<ItemMain.Items> ItemList)
+    + {static} List<ItemMain.Items> InCompleteItems(List<ItemMain.Items> ItemList, List<ItemMain.Items> FilterItemList)
+}
+
+class ImportExport {
+    + {static} List<ItemMain.Items> ExportItems(List<ItemMain.Items> ItemList, String Path)
+    + {static} List<ItemMain.Items> ImportItems(List<ItemMain.Items> ItemList, String Path)
+    String current
+    String name
+    String description
+    String duedate
+    String status
+    int location
+
 }
 
 class ItemMain {
-    + {static} CreateItem(ToDoListMain.ToDoList CurrentList, String Name, String Description, String Duedate, String Status)
-    + {static} ToDoListMain.ToDoList EditItem(ToDoListMain.ToDoList CurrentList, ItemMain.Items CurrentItem,  String Name, String Description, String Duedate, String Status)
-    + Items EditItemGetObj(ToDoListMain.ToDoList CurrentList, ItemMain.Items CurrentItem, String name)
-    + {static} ToDoListMain.ToDoList DestroyItem(ToDoListMain.ToDoList CurrentList, ItemMain.Items CurrentItem)
+    + {static} List<ItemMain.Items> CreateItem(List<ItemMain.Items> ItemList, String Name, String Description, String Duedate, String Status)
+    + {static} Items EditItemGetObj(List<ItemMain.Items> ItemList, String name)
+    + {static} List<ItemMain.Items> DestroyItem(List<ItemMain.Items> ItemList, String Current)
+    + {static} List<ItemMain.Items> EditItem(List<ItemMain.Items> ItemList, String Current, int EditFlag)
 
 }
 
-class Navigator {
-     + {static} void MainNavigate(String Name)
-}
 
 class ToDoListMain {
-    + {static} List<ToDoList> CreateList(List<ToDoList> MainList, String name)
-    + {static} List<ToDoList> EditList(List<ToDoList> MainList, ToDoListMain.ToDoList CurrentList, String newname)
-    + {static} ToDoList EditListGetObj(List<ToDoList> MainList, ToDoListMain.ToDoList CurrentList, String listname)
-    + {static} List<ToDoList> DestroyList(List<ToDoList> MainList, String listname)
-    + {static} ToDoList ExportSelList(List<ToDoList> MainList, ToDoListMain.ToDoList CurrentList)
-    + {static} List<ToDoList> ExportAllList(List<ToDoList> MainList)
-    + {static} List<ToDoList> ImportLists(List<ToDoList> MainList)
-    List<ToDoList> CreateList
+
+}
 
 
 
 class Items{
-        - int id
-        - String name
-        - String description
-        - String duedate
-        - String status
+        + String name
+        + String description
+        + String duedate
+        + String status
 }
 
 class ToDoList{
-        - int ID
-        - String Name
-        - List<ItemMain.Items> ItemList
+        + int ID
+        + String Name
+        + List<ItemMain.Items> ItemList
 }
 
 
@@ -80,7 +76,7 @@ ItemMain *-- Items
 ToDoListMain *-- ToDoList
 App <|-- AppController
 AppController <|-- Filter
+AppController <|-- ImportExport
 AppController <|-- ItemMain
-AppController <|-- Navigator
 AppController <|-- ToDoListMain
 @enduml

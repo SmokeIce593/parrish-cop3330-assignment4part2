@@ -37,9 +37,8 @@ public class ImportExport {
         // C:/Users/Cameron/Desktop/export.txt
         // C:/Users/parriscz/Downloads/export.txt
         BufferedReader br = new BufferedReader(new FileReader(importdata));
-
-        String current;
         StringBuilder currentphrase = new StringBuilder();
+        String current;
         String name = "";
         String description = "";
         String duedate = "";
