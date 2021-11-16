@@ -89,7 +89,7 @@
                   <Insets left="85.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="AddDueDateF" maxWidth="200.0">
+            <TextField fx:id="AddDueDateF" maxWidth="200.0" promptText="YYYY-mm-dd">
                <VBox.margin>
                   <Insets left="85.0" />
                </VBox.margin></TextField>

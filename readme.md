@@ -16,7 +16,7 @@ Main View
 Add/Edit View
 * Unique Name TextField --> Where you edit/add the name of an item.
 * Description TextField --> Where you edit/add the description of an item.
-* Due Date TextField --> Where you edit/add the due date of an item.
+* Due Date TextField --> Where you edit/add the due date of an item (Note this is restricted to format yyyy-mm-dd)
 * Status Choicebox --> Where you edit/change the status of an item.
 * Submit --> Where you submit the Item given the above fields.
 * Close --> Closes the Add/Edit View and brings us back to the Main View.
