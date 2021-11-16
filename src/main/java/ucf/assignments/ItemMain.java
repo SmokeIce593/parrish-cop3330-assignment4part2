@@ -5,8 +5,8 @@
 
 package ucf.assignments;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemMain {
     // This is an item object. Contains the information we need for a single item
@@ -29,7 +29,7 @@ public class ItemMain {
 
         return ItemList;
         /*
-        Psuedocode:
+        Pseudocode:
         Create an Item.
         Add each value passed into method to Item. (Name, Description, Duedate, and Status)
         Then add the item to ItemList and return ItemList
@@ -39,9 +39,9 @@ public class ItemMain {
 
 
     public static Items EditItemGetObj(List<ItemMain.Items> ItemList, String name){
-        for(int i=0; i<ItemList.size(); i++){
-            if(ItemList.get(i).name == name){
-                return ItemList.get(i);
+        for (Items items : ItemList) {
+            if (Objects.equals(items.name, name)) {
+                return items;
             }
 
         }
@@ -58,7 +58,7 @@ public class ItemMain {
 
     public static List<ItemMain.Items> DestroyItem(List<ItemMain.Items> ItemList, String Current){
         for (int i = 0; i < ItemList.size(); i++) {
-            if (ItemList.get(i).name == Current) {
+            if (Objects.equals(ItemList.get(i).name, Current)) {
                 ItemList.remove(i);
                 return ItemList;
             }
@@ -68,7 +68,7 @@ public class ItemMain {
 
         return null;
          /*
-        Psuedocode:
+        Pseudocode:
         Iterate through ItemList.size
         If Itemlist.get(i).name is equal to the current name (which was passed into method)
         remove the item from ItemList

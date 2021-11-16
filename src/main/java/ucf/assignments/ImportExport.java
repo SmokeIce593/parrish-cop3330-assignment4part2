@@ -8,18 +8,18 @@ import java.io.*;
 import java.util.List;
 
 public class ImportExport {
-    public static List<ItemMain.Items> ExportItems(List<ItemMain.Items> ItemList, String Path) throws IOException {
+    public static List<ItemMain.Items> ExportItems(List<ItemMain.Items> ItemList, String Path) {
         try {
             File export = new File(Path);
             FileWriter fw = new FileWriter(export);
-            for(int i=0; i<ItemList.size(); i++){
-                fw.write(ItemList.get(i).name);
+            for (ItemMain.Items items : ItemList) {
+                fw.write(items.name);
                 fw.write(",");
-                fw.write(ItemList.get(i).description);
+                fw.write(items.description);
                 fw.write(",");
-                fw.write(ItemList.get(i).duedate);
+                fw.write(items.duedate);
                 fw.write(",");
-                fw.write(ItemList.get(i).status);
+                fw.write(items.status);
                 fw.write(",");
             }
             fw.close();
@@ -39,41 +39,40 @@ public class ImportExport {
         BufferedReader br = new BufferedReader(new FileReader(importdata));
 
         String current;
-        String currentphrase = "";
+        StringBuilder currentphrase = new StringBuilder();
         String name = "";
         String description = "";
         String duedate = "";
-        String status = "";
+        String status;
         int location = 0;
         while ((current = br.readLine()) != null)
             for(int i=0; i<current.length(); i++){
                 if(current.charAt(i) != ','){
-                    currentphrase += current.charAt(i);
+                    currentphrase.append(current.charAt(i));
                 }
                 else{
-                    switch(location){
-                        case 0:
-                            name = currentphrase;
-                            currentphrase = "";
+                    switch (location) {
+                        case 0 -> {
+                            name = currentphrase.toString();
+                            currentphrase = new StringBuilder();
                             location = 1;
-                            break;
-                        case 1:
-                            description = currentphrase;
-                            currentphrase = "";
+                        }
+                        case 1 -> {
+                            description = currentphrase.toString();
+                            currentphrase = new StringBuilder();
                             location = 2;
-                            break;
-                        case 2:
-                            duedate = currentphrase;
-                            currentphrase = "";
+                        }
+                        case 2 -> {
+                            duedate = currentphrase.toString();
+                            currentphrase = new StringBuilder();
                             location = 3;
-                            break;
-                        case 3:
-                            status = currentphrase;
-                            currentphrase = "";
+                        }
+                        case 3 -> {
+                            status = currentphrase.toString();
+                            currentphrase = new StringBuilder();
                             location = 0;
                             ItemMain.CreateItem(ItemList, name, description, duedate, status);
-
-                            break;
+                        }
                     }
                 }
 

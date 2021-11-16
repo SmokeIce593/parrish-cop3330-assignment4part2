@@ -4,7 +4,6 @@
  */
 package ucf.assignments;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoListMain {
